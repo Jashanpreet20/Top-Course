@@ -1,6 +1,9 @@
-import React from "react";
-
+import React, { useContext } from "react";
+import {ThemeContext} from '../Context/ThemeProvider'
 export default function Filter({ filterData, category, setCategory }) {
+
+  const {theme}=useContext(ThemeContext);
+
   function categoryHandler(title) {
     setCategory(title);
   }
@@ -9,9 +12,9 @@ export default function Filter({ filterData, category, setCategory }) {
       {filterData.map((data) => (
         <button
           onClick={() => categoryHandler(data.title)}
-          className={`bg-gray-600 hover:bg-black hover:border-2 transition-all duration-300
-           rounded-md px-3 py-2 mt-2 text-xl text-white ${
-             data.title === category && "border-2 border-red-600"
+          className={`${theme === "dark" ? "bg-dark text-light" : "bg-light text-dark"}
+           rounded-md px-3 py-2 mt-2 text-xl ${category === data.title && `border-b-2 border-b-orange-500` }
+             
            }`}
           key={data.id}
         >
